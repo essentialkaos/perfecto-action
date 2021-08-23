@@ -84,7 +84,7 @@ runs:
       name: Check RPM files with Perfecto
       shell: bash
       run: |
-        echo -e "Running Perfecto…\n"
+        echo "Running Perfecto…"
 
         export IMAGE="essentialkaos/perfecto:${{inputs.image}}"
 
@@ -96,6 +96,8 @@ runs:
             check_failed=true
           fi
         done
+
+        echo ""
 
         if [[ -n "$check_failed" ]] ; then
           exit 1
