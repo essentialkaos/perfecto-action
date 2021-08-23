@@ -1,0 +1,91 @@
+name: "Perfecto"
+description: "Action for checking RPM files with Perfecto"
+author: "ESSENTIALKAOS"
+
+branding:
+  icon: 'box'
+  color: 'orange'
+
+inputs:
+  files:
+    description: "List of RPM files to check"
+    required: true
+
+  image:
+    description: "Name of Perfecto docker image (micro/centos7)"
+    required: false
+    default: "micro"
+
+  format:
+    description: "Output format (summary|tiny|short|json|xml)"
+    required: false
+
+  absolve:
+    description: "Disable some checks by their ID"
+    required: false
+
+  error-level:
+    description: "Return non-zero exit code if alert level greater than given (notice|warning|error|critical)"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - id: perfecto-install
+      name: Download Perfecto docker image 
+      shell: bash
+      run: |
+        echo "::group::Downloading Perfecto docker image…"
+        docker pull "essentialkaos/perfecto:${{inputs.image}}"
+        echo "::endgroup::"
+
+        echo "::group::Downloading Perfecto helper script…"
+        wget -O $GITHUB_ACTION_PATH/perfecto-docker https://kaos.sh/perfecto/perfecto-docker
+        chmod +x $GITHUB_ACTION_PATH/perfecto-docker
+        echo "::endgroup::"
+
+    - id: perfecto-set-options
+      name: Set Perfecto options
+      shell: bash
+      run : |
+        declare -a options
+
+        if [[ -n "${{inputs.format}}" ]] ; then
+          options+=("-f ${{inputs.format}}")
+        fi
+
+        if [[ -n "${{inputs.absolve}}" ]] ; then
+          options+=("-A ${{inputs.absolve}}")
+        fi
+
+        if [[ -n "${{inputs.error-level}}" ]] ; then
+          options+=("-e ${{inputs.error-level}}")
+        fi
+
+        echo "::group::Perfecto configuration…"
+        if [[ ${#options[@]} -eq 0 ]] ; then
+          echo "Options: -no-set-"
+        else
+          echo "Options: ${options[@]}"
+        fi
+        echo "::endgroup::"
+
+        echo "::set-output name=options::${options[@]}"
+
+    - id: perfecto-version-print
+      name: Print Perfecto version info
+      shell: bash
+      run: |
+        echo "::group::Print Perfecto version…"
+        docker run --rm "essentialkaos/perfecto:${{inputs.image}}" --version
+        echo "::endgroup::"
+
+    - id: perfecto-check
+      name: Check RPM files with Hadolint
+      shell: bash
+      run: |
+        echo "Running Perfecto…"
+        for spec_file in ${{inputs.files}} ; do
+          echo "Checking $spec_file…"
+          $GITHUB_ACTION_PATH/perfecto-docker ${{steps.perfecto-set-options.outputs.options}} $spec_file
+        done
