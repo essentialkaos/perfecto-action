@@ -2,7 +2,7 @@
 
 <br/>
 
-Action for checking RPM spec files with [_perfecto_](https://kaos.sh/).
+Action for checking RPM spec files with [_perfecto_](https://kaos.sh/perfecto).
 
 ### Usage
 
