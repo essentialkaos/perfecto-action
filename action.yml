@@ -32,7 +32,7 @@ runs:
   using: "composite"
   steps:
     - id: perfecto-install
-      name: Download Perfecto docker image 
+      name: Download Perfecto docker image
       shell: bash
       run: |
         echo "::group::Downloading Perfecto docker image…"
