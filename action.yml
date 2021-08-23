@@ -81,11 +81,22 @@ runs:
         echo "::endgroup::"
 
     - id: perfecto-check
-      name: Check RPM files with Hadolint
+      name: Check RPM files with Perfecto
       shell: bash
       run: |
-        echo "Running Perfecto…"
+        echo -e "Running Perfecto…\n"
+
+        export IMAGE="essentialkaos/perfecto:${{inputs.image}}"
+
         for spec_file in ${{inputs.files}} ; do
           echo "Checking $spec_file…"
           $GITHUB_ACTION_PATH/perfecto-docker ${{steps.perfecto-set-options.outputs.options}} $spec_file
+
+          if [[ $? -ne 0 ]] ; then
+            check_failed=true
+          fi
         done
+
+        if [[ -n "$check_failed" ]] ; then
+          exit 1
+        fi
