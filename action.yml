@@ -3,8 +3,8 @@ description: "Action for checking RPM files with Perfecto"
 author: "ESSENTIALKAOS"
 
 branding:
-  icon: 'box'
-  color: 'orange'
+  icon: 'package'
+  color: 'white'
 
 inputs:
   files:
