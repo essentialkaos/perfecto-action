@@ -52,7 +52,7 @@ jobs:
 | `format` | Output format | `summary`<br/>`tiny`<br/>`short`<br/>`json`<br/>`xml` |
 | `error-level` | Return non-zero exit code if alert level greater than given | `notice`<br/>`warning`<br/>`error`<br/>`critical` |
 | `absolve` | Disable some checks by their ID | [Check ID](https://kaos.sh/perfecto/w/Home) |
-| `image` | One or more files to check | `tiny`<br/>`centos7` |
+| `image` | One or more files to check | `tiny` (_Default_)<br/>`centos7` |
 
 ### License
 
