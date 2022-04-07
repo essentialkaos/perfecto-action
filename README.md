@@ -46,11 +46,13 @@ jobs:
 
 ### Options
 
-- `files` - One or more files to check
-- `format` - Output format (`summary`|`tiny`|`short`|`json`|`xml`)
-- `error-level` - Return non-zero exit code if alert level greater than given (`notice`|`warning`|`error`|`critical`)
-- `absolve` - Disable some checks by their ID ([wiki](https://kaos.sh/perfecto/w/Home))
-- `image` - Name of official image of _perfecto_ (`tiny`|`centos7`)
+| Option | Description | Value |
+|--------|-------------|--------|
+| `files` | One or more files to check | _Path to spec file_ |
+| `format` | Output format | `summary`<br/>`tiny`<br/>`short`<br/>`json`<br/>`xml` |
+| `error-level` | Return non-zero exit code if alert level greater than given | `notice`<br/>`warning`<br/>`error`<br/>`critical` |
+| `absolve` | Disable some checks by their ID | [Check ID](https://kaos.sh/perfecto/w/Home) |
+| `image` | One or more files to check | `tiny`<br/>`centos7` |
 
 ### License
 
