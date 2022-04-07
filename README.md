@@ -44,6 +44,7 @@ jobs:
           format: tiny
           error-level: warning
           absolve: PF1,PF2,PF3
+          image: centos7
 
 ```
 
