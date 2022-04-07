@@ -41,12 +41,16 @@ jobs:
         uses: essentialkaos/perfecto-action@v1
         with:
           files: myapp.spec
-          format: tiny
-          error-level: warning
-          absolve: PF1,PF2,PF3
-          image: centos7
 
 ```
+
+### Options
+
+- `files` - One or more files to check
+- `format` - Output format (`summary`|`tiny`|`short`|`json`|`xml`)
+- `error-level` - Return non-zero exit code if alert level greater than given (`notice`|`warning`|`error`|`critical`)
+- `absolve` - Disable some checks by their ID ([wiki](https://kaos.sh/perfecto/w/Home))
+- `image` - Name of official image of _perfecto_ (`tiny`|`centos7`)
 
 ### License
 
