@@ -35,11 +35,13 @@ runs:
       name: Download Perfecto docker image
       shell: bash
       run: |
-        echo "::group::Downloading Perfecto docker image…"
+        # [perfecto-install]
+
+        echo -e "::group::\e[34mDownloading Perfecto docker image…\e[0m"
         docker pull "essentialkaos/perfecto:${{inputs.image}}"
         echo "::endgroup::"
 
-        echo "::group::Downloading Perfecto helper script…"
+        echo -e "::group::\e[34mDownloading Perfecto helper script…\e[0m"
         wget -O $GITHUB_ACTION_PATH/perfecto-docker https://kaos.sh/perfecto/perfecto-docker
         chmod +x $GITHUB_ACTION_PATH/perfecto-docker
         echo "::endgroup::"
@@ -48,6 +50,8 @@ runs:
       name: Set Perfecto options
       shell: bash
       run : |
+        # [perfecto-set-options]
+
         declare -a options
 
         if [[ -n "${{inputs.format}}" ]] ; then
@@ -62,7 +66,7 @@ runs:
           options+=("-e ${{inputs.error-level}}")
         fi
 
-        echo "::group::Perfecto configuration…"
+        echo -e "::group::\e[34mPerfecto configuration…\e[0m"
         if [[ ${#options[@]} -eq 0 ]] ; then
           echo "Options: -no-set-"
         else
@@ -76,7 +80,9 @@ runs:
       name: Print Perfecto version info
       shell: bash
       run: |
-        echo "::group::Print Perfecto version…"
+        # [perfecto-version-print]
+
+        echo -e "::group::\e[34mPrint Perfecto version…\e[0m"
         docker run --rm "essentialkaos/perfecto:${{inputs.image}}" --version
         echo "::endgroup::"
 
@@ -84,7 +90,9 @@ runs:
       name: Check RPM files with Perfecto
       shell: bash
       run: |
-        echo "Running Perfecto…"
+        # [perfecto-check]
+
+        echo "\e[34mRunning Perfecto…\e[0m"
 
         export IMAGE="essentialkaos/perfecto:${{inputs.image}}"
 
