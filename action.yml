@@ -92,7 +92,7 @@ runs:
       run: |
         # [perfecto-check]
 
-        echo "\e[34mRunning Perfecto…\e[0m"
+        echo -e "\e[34mRunning Perfecto…\e[0m"
 
         export IMAGE="essentialkaos/perfecto:${{inputs.image}}"
 
