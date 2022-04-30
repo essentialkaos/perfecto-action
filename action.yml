@@ -37,11 +37,11 @@ runs:
       run: |
         # [perfecto-install]
 
-        echo -e "::group::\e[34mDownloading Perfecto docker image…\e[0m"
+        echo -e "::group::\033[34mDownloading Perfecto docker image…\033[0m"
         docker pull "essentialkaos/perfecto:${{inputs.image}}"
         echo "::endgroup::"
 
-        echo -e "::group::\e[34mDownloading Perfecto helper script…\e[0m"
+        echo -e "::group::\033[34mDownloading Perfecto helper script…\033[0m"
         wget -O $GITHUB_ACTION_PATH/perfecto-docker https://kaos.sh/perfecto/perfecto-docker
         chmod +x $GITHUB_ACTION_PATH/perfecto-docker
         echo "::endgroup::"
@@ -66,7 +66,7 @@ runs:
           options+=("-e ${{inputs.error-level}}")
         fi
 
-        echo -e "::group::\e[34mPerfecto configuration…\e[0m"
+        echo -e "::group::\033[34mPerfecto configuration…\033[0m"
         if [[ ${#options[@]} -eq 0 ]] ; then
           echo "Options: -no-set-"
         else
@@ -82,7 +82,7 @@ runs:
       run: |
         # [perfecto-version-print]
 
-        echo -e "::group::\e[34mPrint Perfecto version…\e[0m"
+        echo -e "::group::\033[34mPrint Perfecto version…\033[0m"
         docker run --rm "essentialkaos/perfecto:${{inputs.image}}" --version
         echo "::endgroup::"
 
@@ -92,7 +92,7 @@ runs:
       run: |
         # [perfecto-check]
 
-        echo -e "\e[34mRunning Perfecto…\e[0m"
+        echo -e "\033[34mRunning Perfecto…\033[0m"
 
         export IMAGE="essentialkaos/perfecto:${{inputs.image}}"
 
