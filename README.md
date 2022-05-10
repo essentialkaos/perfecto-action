@@ -28,7 +28,7 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v3
 
-      - name: Login to DockerHub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ${{ env.REGISTRY }}
