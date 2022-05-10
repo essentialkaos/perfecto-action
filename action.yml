@@ -84,7 +84,7 @@ runs:
         # [perfecto-version-print]
 
         echo -e "::group::\033[34mPrint Perfecto version…\033[0m"
-        docker run --rm "essentialkaos/perfecto:${{inputs.image}}" --version
+        docker run --rm "${{inputs.image}}" --version
         echo "::endgroup::"
 
     - id: perfecto-check
@@ -95,7 +95,7 @@ runs:
 
         echo -e "\033[34mRunning Perfecto…\033[0m"
 
-        export IMAGE="essentialkaos/perfecto:${{inputs.image}}"
+        export IMAGE="${{inputs.image}}"
 
         for spec_file in ${{inputs.files}} ; do
           echo -e "\nChecking $spec_file…"
