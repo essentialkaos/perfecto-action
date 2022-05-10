@@ -14,12 +14,12 @@ inputs:
   image:
     description: "Name of Perfecto docker image"
     required: false
-    default: "essentialkaos/perfecto:micro"
+    default: "ghcr.io/essentialkaos/perfecto:micro"
 
   format:
-    description: "Output format (summary|tiny|short)"
+    description: "Output format (github|summary|tiny|short)"
+    default: "github"
     required: false
-    default: "summary"
 
   absolve:
     description: "Disable some checks by their ID"

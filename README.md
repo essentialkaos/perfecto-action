@@ -30,15 +30,13 @@ jobs:
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        if: ${{ env.DOCKERHUB_USERNAME != '' }}
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check specs with Perfecto
-        uses: essentialkaos/perfecto-action@v1
+        uses: essentialkaos/perfecto-action@v2
         with:
           files: myapp.spec
 
@@ -49,10 +47,10 @@ jobs:
 | Option | Description | Value |
 |--------|-------------|-------|
 | `files` | One or more files to check | _Path to spec file_ |
-| `format` | Output format | `summary` (_Default_)<br/>`tiny`<br/>`short` |
+| `format` | Output format | `github` (_Default_)<br/>`summary`<br/>`tiny`<br/>`short` |
 | `error-level` | Return non-zero exit code if alert level greater than given | `notice`<br/>`warning`<br/>`error`<br/>`critical` |
 | `absolve` | Disable some checks by their ID | [Check ID](https://kaos.sh/perfecto/w/Home) |
-| `image` | Docker image with perfecto | `essentialkaos/perfecto:micro` (_Default_) |
+| `image` | Docker image with perfecto | `ghcr.io/essentialkaos/perfecto:micro` (_Default_) |
 
 ### License
 
