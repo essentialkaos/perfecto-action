@@ -12,13 +12,14 @@ inputs:
     required: true
 
   image:
-    description: "Name of Perfecto docker image (micro/centos7)"
+    description: "Name of Perfecto docker image"
     required: false
-    default: "micro"
+    default: "essentialkaos/perfecto:micro"
 
   format:
-    description: "Output format (summary|tiny|short|json|xml)"
+    description: "Output format (summary|tiny|short)"
     required: false
+    default: "summary"
 
   absolve:
     description: "Disable some checks by their ID"
@@ -37,8 +38,8 @@ runs:
       run: |
         # [perfecto-install]
 
-        echo -e "::group::\033[34mDownloading Perfecto docker image…\033[0m"
-        docker pull "essentialkaos/perfecto:${{inputs.image}}"
+        echo -e "::group::\033[34mDownloading Perfecto Docker image…\033[0m"
+        docker pull "${{inputs.image}}"
         echo "::endgroup::"
 
         echo -e "::group::\033[34mDownloading Perfecto helper script…\033[0m"
