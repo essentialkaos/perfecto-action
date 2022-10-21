@@ -75,7 +75,7 @@ runs:
         fi
         echo "::endgroup::"
 
-        echo "::set-output name=options::${options[@]}"
+        echo "options=${options[@]}" >> $GITHUB_OUTPUT
 
     - id: perfecto-version-print
       name: Print Perfecto version info
