@@ -63,7 +63,7 @@ runs:
         echo "::endgroup::"
 
         echo -e "::group::\033[34mDownloading Perfecto helper script…\033[0m"
-        wget -O $GITHUB_ACTION_PATH/perfecto-container https://kaos.sh/perfecto/perfecto-container
+        wget -O $GITHUB_ACTION_PATH/perfecto-container https://raw.githubusercontent.com/essentialkaos/perfecto/master/perfecto-container
         chmod +x $GITHUB_ACTION_PATH/perfecto-container
         echo "::endgroup::"
 
