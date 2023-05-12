@@ -50,7 +50,8 @@ jobs:
 | `format` | Output format | `github` (_Default_)<br/>`summary`<br/>`tiny`<br/>`short` |
 | `error-level` | Return non-zero exit code if alert level greater than given | `notice`<br/>`warning`<br/>`error`<br/>`critical` |
 | `absolve` | Disable some checks by their ID | [Check ID](https://kaos.sh/perfecto/w/Home) |
-| `image` | Docker image with perfecto | `ghcr.io/essentialkaos/perfecto:micro` (_Default_) |
+| `image` | Container image with perfecto | `ghcr.io/essentialkaos/perfecto:micro` (_Default_) |
+| `engine` | Container engine | `docker` (_Default_)<br/>`podman` |
 
 ### License
 

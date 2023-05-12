@@ -12,14 +12,28 @@ inputs:
     required: true
 
   image:
-    description: "Name of Perfecto docker image"
+    description: "Name of Perfecto container image"
     required: false
     default: "ghcr.io/essentialkaos/perfecto:micro"
 
+  engine:
+    description: "Name of container engine"
+    required: false
+    type: choice
+    options:
+      - docker
+      - podman
+
   format:
     description: "Output format (github|summary|tiny|short)"
-    default: "github"
     required: false
+    default: "github"
+    type: choice
+    options:
+      - github
+      - summary
+      - tiny
+      - short
 
   absolve:
     description: "Disable some checks by their ID"
@@ -28,6 +42,12 @@ inputs:
   error-level:
     description: "Return non-zero exit code if alert level greater than given (notice|warning|error|critical)"
     required: false
+    type: choice
+    options:
+      - notice
+      - warning
+      - error
+      - critical
 
 runs:
   using: "composite"
@@ -96,6 +116,7 @@ runs:
         echo -e "\033[34mRunning Perfecto…\033[0m"
 
         export IMAGE="${{inputs.image}}"
+        export ENGINE="${{inputs.engine}}"
 
         for spec_file in ${{inputs.files}} ; do
           echo -e "\nChecking $spec_file…"
