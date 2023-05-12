@@ -43,8 +43,8 @@ runs:
         echo "::endgroup::"
 
         echo -e "::group::\033[34mDownloading Perfecto helper script…\033[0m"
-        wget -O $GITHUB_ACTION_PATH/perfecto-docker https://kaos.sh/perfecto/perfecto-docker
-        chmod +x $GITHUB_ACTION_PATH/perfecto-docker
+        wget -O $GITHUB_ACTION_PATH/perfecto-container https://kaos.sh/perfecto/perfecto-container
+        chmod +x $GITHUB_ACTION_PATH/perfecto-container
         echo "::endgroup::"
 
     - id: perfecto-set-options
@@ -100,7 +100,7 @@ runs:
         for spec_file in ${{inputs.files}} ; do
           echo -e "\nChecking $spec_file…"
 
-          $GITHUB_ACTION_PATH/perfecto-docker ${{steps.perfecto-set-options.outputs.options}} $spec_file
+          $GITHUB_ACTION_PATH/perfecto-container ${{steps.perfecto-set-options.outputs.options}} "$spec_file"
 
           if [[ $? -ne 0 ]] ; then
             check_failed=true
