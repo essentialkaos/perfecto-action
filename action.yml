@@ -35,7 +35,7 @@ inputs:
       - tiny
       - short
 
-  absolve:
+  ignore:
     description: "Disable some checks by their ID"
     required: false
 
@@ -79,8 +79,8 @@ runs:
           options+=("-f ${{inputs.format}}")
         fi
 
-        if [[ -n "${{inputs.absolve}}" ]] ; then
-          options+=("-A ${{inputs.absolve}}")
+        if [[ -n "${{inputs.ignore}}" ]] ; then
+          options+=("-I ${{inputs.ignore}}")
         fi
 
         if [[ -n "${{inputs.error-level}}" ]] ; then
