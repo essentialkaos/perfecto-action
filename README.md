@@ -38,6 +38,7 @@ jobs:
       - name: Check specs with Perfecto
         uses: essentialkaos/perfecto-action@v2
         with:
+          ignore: PF2,PF12
           files: myapp.spec
 
 ```
@@ -46,10 +47,10 @@ jobs:
 
 | Option | Description | Value |
 |--------|-------------|-------|
-| `files` | One or more files to check | _Path to spec file_ |
+| `files` | One or more files to check | _Path to spec files_ |
 | `format` | Output format | `github` (_Default_)<br/>`summary`<br/>`tiny`<br/>`short` |
 | `error-level` | Return non-zero exit code if alert level greater than given | `notice`<br/>`warning`<br/>`error`<br/>`critical` |
-| `absolve` | Disable some checks by their ID | [Check ID](https://kaos.sh/perfecto/w/Home) |
+| `ignore` | Disable one or more checks by their ID | [Check ID](https://kaos.sh/perfecto/w/Home) |
 | `image` | Container image with perfecto | `ghcr.io/essentialkaos/perfecto:micro` (_Default_) |
 | `engine` | Container engine | `docker` (_Default_)<br/>`podman` |
 
